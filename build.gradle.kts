@@ -97,7 +97,9 @@ afterEvaluate {
                 url = URI.create("https://oss.sonatype.org/content/repositories/snapshots/")
                 credentials {
                     username = properties["ossrhUsername"] as? String
+                        ?: System.getenv("OSSRH_USERNAME")
                     password = properties["ossrhPassword"] as? String
+                        ?: System.getenv("OSSRH_PASSWORD")
                 }
             }
             maven {
@@ -105,7 +107,9 @@ afterEvaluate {
                 url = URI.create("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                 credentials {
                     username = properties["ossrhUsername"] as? String
+                        ?: System.getenv("OSSRH_USERNAME")
                     password = properties["ossrhPassword"] as? String
+                        ?: System.getenv("OSSRH_PASSWORD")
                 }
             }
         }

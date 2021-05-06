@@ -8,6 +8,8 @@ jobs:
     name: Build and publish
     runs-on: ubuntu-latest
 
+    environment: Default
+
     steps:
       - uses: actions/checkout@v2
 
@@ -21,4 +23,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build and publish with gradlew
+        env:
+          - OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          - OSSRH_PASSWORD: ${{ secrets.OSSRH_USERNAME }}
         run: ./gradlew publishAllPublicationsToSnapshotRepository -x lint
