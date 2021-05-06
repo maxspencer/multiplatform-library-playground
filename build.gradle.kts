@@ -96,10 +96,14 @@ afterEvaluate {
                 name = "snapshot"
                 url = URI.create("https://oss.sonatype.org/content/repositories/snapshots/")
                 credentials {
-                    username = properties["ossrhUsername"] as? String
-                        ?: System.getenv("OSSRH_USERNAME")
-                    password = properties["ossrhPassword"] as? String
-                        ?: System.getenv("OSSRH_PASSWORD")
+                    username = (properties["ossrhUsername"] as? String
+                        ?: System.getenv("OSSRH_USERNAME")).also {
+                        println(it)
+                    }
+                    password = (properties["ossrhPassword"] as? String
+                        ?: System.getenv("OSSRH_PASSWORD")).also {
+                        println(it)
+                    }
                 }
             }
             maven {
