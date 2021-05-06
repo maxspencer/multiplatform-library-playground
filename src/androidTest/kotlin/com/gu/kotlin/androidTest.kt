@@ -1,4 +1,4 @@
-package com.gu.library
+package com.gu.kotlin
 
 import org.junit.Assert.assertTrue
 import org.junit.Test

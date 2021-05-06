@@ -3,7 +3,7 @@ plugins {
     id("com.android.library")
 }
 
-group = "com.gu"
+group = "com.gu.kotlin"
 version = "0.1-SNAPSHOT"
 
 repositories {
@@ -16,7 +16,7 @@ kotlin {
     iosX64("ios") {
         binaries {
             framework {
-                baseName = "library"
+                baseName = "multiplatform-playground"
             }
         }
     }

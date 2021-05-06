@@ -1,4 +1,4 @@
-package com.gu.library
+package com.gu.kotlin
 
 
 import platform.UIKit.UIDevice
