@@ -24,6 +24,6 @@ jobs:
 
       - name: Build and publish with gradlew
         env:
-          - OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-          - OSSRH_PASSWORD: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_USERNAME }}
         run: ./gradlew publishAllPublicationsToSnapshotRepository -x lint
