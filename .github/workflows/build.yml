@@ -1,4 +1,4 @@
-name: Multiplatform build
+name: Build
 
 on:
   push:

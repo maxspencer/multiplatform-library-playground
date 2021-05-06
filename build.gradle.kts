@@ -1,6 +1,9 @@
+import java.net.URI
+
 plugins {
     kotlin("multiplatform") version "1.4.31"
     id("com.android.library")
+    id("maven-publish")
 }
 
 group = "com.gu.kotlin"
@@ -12,7 +15,9 @@ repositories {
 }
 
 kotlin {
-    android()
+    android {
+        publishLibraryVariants("release")
+    }
     iosX64("ios") {
         binaries {
             framework {
@@ -51,4 +56,61 @@ android {
         minSdkVersion(24)
         targetSdkVersion(30)
     }
+}
+
+afterEvaluate {
+    publishing {
+        publications
+            .filterIsInstance<MavenPublication>()
+            .forEach { publication ->
+                publication.pom {
+                    name.set("multiplatform-playground")
+                    description.set("A Kotlin Multiplatform library for experiments.")
+                    url.set("https://github.com/maxspencer/multiplatform-library-playground")
+                    licenses {
+                        license {
+                            name.set("The MIT License (MIT)")
+                            url.set("https://opensource.org/licenses/MIT")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:git://github.com/maxspencer/multiplatform-library-playground.git")
+                        developerConnection.set("scm:git:ssh://github.com/maxspencer/multiplatform-library-playground.git")
+                        url.set("https://github.com/maxspencer/multiplatform-library-playground")
+
+                    }
+                    developers {
+                        developer {
+                            id.set("maxspencer")
+                            name.set("Max Spencer")
+                            email.set("max.spencer@guardian.co.uk")
+                            url.set("https://github.com/maxspencer")
+                            organization.set("The Guardian")
+                            organizationUrl.set("https://theguardian.com")
+                        }
+                    }
+                }
+            }
+        repositories {
+            maven {
+                name = "snapshot"
+                url = URI.create("https://oss.sonatype.org/content/repositories/snapshots/")
+                credentials {
+                    username = properties["ossrhUsername"] as? String
+                    password = properties["ossrhPassword"] as? String
+                }
+            }
+            maven {
+                name = "staging"
+                url = URI.create("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = properties["ossrhUsername"] as? String
+                    password = properties["ossrhPassword"] as? String
+                }
+            }
+        }
+    }
+    //signing {
+    //    sign(publishing.publications)
+    //}
 }
