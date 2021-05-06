@@ -24,6 +24,6 @@ jobs:
 
       - name: Build and publish with gradlew
         env:
-          - OSSRH_USERNAME: "NOT ACTUALLY MY USERNAME"
-          - OSSRH_PASSWORD: "NOT REALLY MY PASSWORD"
+          OSSRH_USERNAME: "NOT ACTUALLY MY USERNAME"
+          OSSRH_PASSWORD: "NOT REALLY MY PASSWORD"
         run: ./gradlew publishAllPublicationsToSnapshotRepository -x lint
