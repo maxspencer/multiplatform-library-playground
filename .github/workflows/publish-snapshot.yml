@@ -7,7 +7,6 @@ jobs:
   publish:
     name: Build and publish
     runs-on: ubuntu-latest
-
     environment: Default
 
     steps:
@@ -24,6 +23,6 @@ jobs:
 
       - name: Build and publish with gradlew
         env:
-          OSSRH_USERNAME: "NOT ACTUALLY MY USERNAME"
-          OSSRH_PASSWORD: "NOT REALLY MY PASSWORD"
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
         run: ./gradlew publishAllPublicationsToSnapshotRepository -x lint
